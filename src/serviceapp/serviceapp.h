@@ -27,7 +27,16 @@ struct eServiceAppOptions
 		connectionSpeedInKb(std::numeric_limits<unsigned int>::max())
 	{};
 };
-
+SWIG_IGNORE(iSubtitleUser);
+class iSubtitleUser
+{
+public:
+	virtual void setPage(const eDVBTeletextSubtitlePage &p) = 0;
+	virtual void setPage(const eDVBSubtitlePage &p) = 0;
+	virtual void setPage(const ePangoSubtitlePage &p) = 0;
+	virtual void setPixmap(ePtr<gPixmap> &pixmap, gRegion changed, eRect dest) = 0;
+	virtual void destroy() = 0;
+};
 #if SIGCXX_MAJOR_VERSION == 2
 class eServiceApp: public sigc::trackable, public iPlayableService, public iPauseableService, public iSeekableService,
 #else
