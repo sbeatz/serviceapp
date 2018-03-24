@@ -33,7 +33,7 @@ class eServiceApp: public sigc::trackable, public iPlayableService, public iPaus
 #else
 class eServiceApp: public Object, public iPlayableService, public iPauseableService, public iSeekableService,
 #endif
-	public iAudioChannelSelection, public iAudioTrackSelection,  public iSubtitleOutput, public iSubserviceList, public iServiceInformation
+	public iAudioChannelSelection, public iAudioTrackSelection,  /*public iSubtitleOutput,*/ public iSubserviceList, public iServiceInformation
 {
 	DECLARE_REF(eServiceApp);
 
@@ -57,33 +57,33 @@ class eServiceApp: public Object, public iPlayableService, public iPauseableServ
 	bool m_paused;
 	int m_framerate, m_width, m_height, m_progressive;
 
-	typedef std::map<uint32_t, subtitleMessage> subtitle_pages_map;
-	typedef std::pair<uint32_t, subtitleMessage> subtitle_pages_map_pair;
-	typedef std::map<SubtitleTrack, subtitleStream> subtitle_track_stream_map;
+	/*typedef std::map<uint32_t, subtitleMessage> subtitle_pages_map;
+	typedef std::pair<uint32_t, subtitleMessage> subtitle_pages_map_pair;*/
+	//typedef std::map<SubtitleTrack, subtitleStream> subtitle_track_stream_map;
 
-	std::vector<SubtitleTrack> m_subtitle_tracks;
-	std::vector<subtitleStream> m_subtitle_streams;
+	//std::vector<SubtitleTrack> m_subtitle_tracks;
+	//std::vector<subtitleStream> m_subtitle_streams;
 
-	subtitle_pages_map m_embedded_subtitle_pages;
-	subtitle_pages_map const *m_subtitle_pages;
-	SubtitleTrack const *m_selected_subtitle_track;
-	subtitleMessage const *m_prev_subtitle_message;
-	ePtr<eTimer> m_subtitle_sync_timer;
-	iSubtitleUser *m_subtitle_widget;
-	SubtitleManager m_subtitle_manager;
-	pts_t m_prev_subtitle_fps;
+	//subtitle_pages_map m_embedded_subtitle_pages;
+	//subtitle_pages_map const *m_subtitle_pages;
+	//SubtitleTrack const *m_selected_subtitle_track;
+	//subtitleMessage const *m_prev_subtitle_message;
+	//ePtr<eTimer> m_subtitle_sync_timer;
+	//iSubtitleUser *m_subtitle_widget;
+	//SubtitleManager m_subtitle_manager;
+	//pts_t m_prev_subtitle_fps;
 	ePtr<eTimer> m_event_updated_info_timer;
 
 	pts_t m_prev_decoder_time;
 	int m_decoder_time_valid_state;
 
-	ssize_t getTrackPosition(const SubtitleTrack &track);
+	/*ssize_t getTrackPosition(const SubtitleTrack &track);
 	void addEmbeddedTrack(std::vector<struct SubtitleTrack> &, subtitleStream &s, int pid);
 	void addExternalTrack(std::vector<struct SubtitleTrack> &, int pid, std::string lang, std::string path);
 	static bool isEmbeddedTrack(const SubtitleTrack &track);
 	static bool isExternalTrack(const SubtitleTrack &track);
 	void pullSubtitles();
-	void pushSubtitles();
+	void pushSubtitles();*/
 	void signalEventUpdatedInfo();
 
 #ifdef HAVE_EPG
@@ -151,10 +151,10 @@ public:
 	RESULT selectChannel(int i);
 
 	// iSubtitleOutput
-	RESULT enableSubtitles(iSubtitleUser *user, SubtitleTrack &track);
+	/*RESULT enableSubtitles(iSubtitleUser *user, SubtitleTrack &track);
 	RESULT disableSubtitles();
 	RESULT getCachedSubtitle(SubtitleTrack &track);
-	RESULT getSubtitleList(std::vector<SubtitleTrack> &subtitlelist);
+	RESULT getSubtitleList(std::vector<SubtitleTrack> &subtitlelist);*/
 
 	// iSubserviceList
 	int getNumberOfSubservices();
