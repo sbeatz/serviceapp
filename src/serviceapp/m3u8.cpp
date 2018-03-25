@@ -136,7 +136,7 @@ int M3U8VariantsExplorer::getVariantsFromMasterUrl(const std::string& url, Heade
         userAgent = it->second;
     }
     headers["User-Agent"] = userAgent;
-
+    headers["Cookie"] = "";
     std::string path = purl.path();
     std::string query = purl.query();
     if (!query.empty())
@@ -247,7 +247,8 @@ int M3U8VariantsExplorer::getVariantsFromMasterUrl(const std::string& url, Heade
             }
             if (!strncmp(lineBuffer, "Set-Cookie: ", 12))
             {
-                headers["Cookie"] = &lineBuffer[12];
+                
+                headers["Cookie"].append(&lineBuffer[12], ";");
             }
             if (!result)
             {
